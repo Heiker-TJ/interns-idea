@@ -1,0 +1,169 @@
+* {
+    font-family: "Darker Grotesque", sans-serif;
+}
+
+:root {
+    --circleDiameter: 300px; /* Diameter of the orbiting circle */
+    --planetDiameter: 450px;
+    --planets: 60px; /* Diameter of the planets */
+    --iconSize: 30px;
+    --animationDuration: 100s;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #111111;
+}
+
+.fake-grad-circle {
+    position: relative;
+    width: var( --circleDiameter);
+    height: var( --circleDiameter);
+    border-radius: 100%;
+}
+
+.gradient-circle {
+    width: var( --circleDiameter);
+    height: var( --circleDiameter); 
+    background: linear-gradient(45deg, #C69EEE, #8A14FE, #562b81, #2f1648);
+    border-radius: 100%;
+    animation-name: spin;
+    animation-duration: 10s; 
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.fake-grad-circle::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(#4c1f76, #78529D, #9147DA, #4D2674, hsl(271, 52%, 21%));
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    border-radius: 100%;
+    padding: 2rem;
+    filter: blur(3rem);
+    opacity: 60%;
+}
+
+
+/* @keyframes spin {
+    0% {
+
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} */
+
+.hero-rotate {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.planet {
+    width: var(--planets);
+    height:  var(--planets);
+    background-color: #2f1648;
+    border-radius: 50%;
+    position: absolute;
+    left: -15%;
+    top: -14%;
+    translate: -50% -50%;
+    list-style: none;
+    transform-origin: calc(var(--planetDiameter) / 2) calc(var(--planetDiameter) / 2);
+    transition-duration: 0.7s;
+    transform-style: ease-in-out;
+    animation: orbit var(--animationDuration) linear infinite;
+}
+
+@keyframes orbit {
+    0% { transform: rotate(0deg) translateX(calc(var(--planetDiameter) / 2)); }
+    100% { transform: rotate(360deg) translateX(calc(var(--planetDiameter) / 2)); }
+}
+
+@keyframes desc-orbit {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg); }
+}
+
+/* Counter-rotation animation to keep the icon horizontal */
+@keyframes counter-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+}
+
+.planet:nth-child(1) { animation-delay: 0s; }
+.planet:nth-child(2) { animation-delay: -12s; }
+.planet:nth-child(3) { animation-delay: -25s; }
+.planet:nth-child(4) { animation-delay: -37s; }
+.planet:nth-child(5) { animation-delay: -50s; }
+.planet:nth-child(6) { animation-delay: -62s; }
+.planet:nth-child(7) { animation-delay: -75s; }
+.planet:nth-child(8) { animation-delay: -87s; }
+
+.planet:hover {
+    background: linear-gradient(#4c1f76, #78529D, #9147DA, #4D2674);
+}
+
+.planet::before {
+    content: '';
+    background: #8A14FE;
+    opacity: 50%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    border-radius: 50%;
+}
+
+.planet::before {
+    filter: blur(1.5rem);
+}
+
+
+i {
+    font-size: var(--iconSize);
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    animation: counter-rotate var(--animationDuration) linear infinite;
+}
+
+.planet:nth-child(2) { transform: rotate(180deg); }
+.planet:nth-child(3) { transform: rotate(0deg); }
+.planet:nth-child(4) { transform: rotate(0deg); }
+.planet:nth-child(5) { transform: rotate(0deg); }
+.planet:nth-child(6) { transform: rotate(0deg); }
+.planet:nth-child(7) { transform: rotate(0deg); }
+.planet:nth-child(8) { transform: rotate(0deg); }
+
+
+.icon-desc {
+    text-align: center;
+    color: white;
+    position: absolute;
+    font-size: 14px;
+    border: 1px solid #8A14FE;
+    border-width: 1px;
+    padding: .5rem;
+    border-radius: .4rem;
+}
+
